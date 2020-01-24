@@ -1,5 +1,6 @@
 var wb, excelJson, rolling = -1,
-    times, t, anti_cheat = false;
+    times, t, anti_cheat = false,
+    name_number, duration = 200;
 
 if (window.localStorage.data) {
     excelJson = JSON.parse(window.localStorage.data);
@@ -12,13 +13,29 @@ if (window.localStorage.anti_cheat == "true") {
     document.getElementById("defaultCheck1").checked = true;
 }
 
+if (window.localStorage.name_number) {
+    name_number = window.localStorage.name_number;
+    document.getElementById("name_number").selectedIndex = window.localStorage.name_number - 1;
+}
+
 function setting_apply() {
     if (document.getElementById("defaultCheck1").checked) {
         window.localStorage.anti_cheat = anti_cheat = true;
     } else {
         window.localStorage.anti_cheat = anti_cheat = false;
     }
+    let obj = document.getElementById("name_number");
+    let index = obj.selectedIndex;
+    window.localStorage.name_number = name_number = obj.options[index].value;
+}
 
+function refresh_card() {
+    times = 0;
+    tail = $("div.card.align-middle");
+    let child = document.getElementsByClassName("card card-roll");
+    //console.log(child);
+    let len = child.length - 1;
+    while (len--) child[1].parentNode.removeChild(child[1]);
 }
 
 function importf(obj) {
@@ -52,38 +69,48 @@ document.onkeydown = function(event) {
 
 function getCard(datas) {
     let data = datas[parseInt(Math.random() * datas.length, 10)];
-    return data["no"] + '<br>' + data["name"];
+    return data["type"] + '<br>' + data["no"] + '<br>' + data["name"];
 }
 
+
 function roll() {
-    let cardText = getCard(excelJson);
-    times++;
-    card = $(
-        '<div class="card card-roll" id="id-' +
+    let cardString;
+    let cardText = new Array();
+    cardString = '<div class="card card-roll" id="id-' +
         parseInt(times) +
         '">' +
-        '<div class="title">' +
-        cardText +
-        '</div>' +
-        '</div>'
-    );
+        '<div class="row">';
+    times++;
+    for (let i = 1; i <= name_number; i++) {
+        cardText[i] = getCard(excelJson);
+        for (let j = 1; j < i; j++) {
+            while (cardText[i] == cardText[j]) {
+                cardText[i] = getCard(excelJson);
+                j = 0;
+            }
+        }
+        cardString += '<div class="title col-sm">' +
+            cardText[i] +
+            '</div>';
+    }
+    cardString += '</div>' + '</div>'
+    //console.log(cardString);
+    card = $(cardString);
     //if (times == 100) rolling = false;
     //card.addId(`id-${times}`);
-    if (times > 2) {
-        let str = "id-" + parseInt(times - 2);
-        console.log(str);
+    tail.after(card);
+    tail = card;
+    if (times > 3) {
+        let str = "id-" + parseInt(times - 3);
+        //console.log(str);
         let child = document.getElementById(str);
         //console.log(child);
         child.parentNode.removeChild(child);
     }
-    //showCard(card, duration, slide);
-    tail.after(card);
-    tail = card;
 }
 
 function startroll() {
-    console.log("gugugu");
-    const duration = 200;
+    //console.log("gugugu");
     rolling = 1;
     times = 0;
     t = setInterval(roll, duration);
@@ -94,6 +121,8 @@ function endroll() {
     clearInterval(t);
     if (anti_cheat) {
         console.log("anti-cheat!");
-        roll();
+        setTimeout(function() {
+            roll();
+        }, duration / 1.5);
     }
 }

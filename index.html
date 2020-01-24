@@ -43,7 +43,7 @@
                                 <label for="exampleFormControlFile1">导入excel表格：</label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" onchange="importf(this)">
-                                    <label class="custom-file-label" style="justify-content:left">选择文件上传(文件实时更新)</label>
+                                    <label class="custom-file-label" style="justify-content:left">选择文件上传(文件实时保存)</label>
                                 </div>
                             </div>
                             <div class="form-check py-3" id="anti_cheat">
@@ -52,10 +52,20 @@
                                     开启防作弊(按下Enter后多滚动一张)
                                 </label>
                             </div>
+                            <div class="form-row align-items-center">
+                                <label for="colFormLabelLg" class="col-form-label">同时抽取人数：</label>
+                                <select class="form-control form-control-sm" id="name_number">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option><!-- 
+                                    <option>4</option> -->
+                                </select>
+                                <label for="colFormLabelLg" class="col-form-label">(请保证足够宽度以全部显示)</label>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-                            <button type="button" class="btn btn-primary" onclick="setting_apply();">应用</button>
+                            <button type="button" class="btn btn-primary" onclick="setting_apply();">保存</button>
                         </div>
                     </div>
                 </div>
@@ -64,7 +74,7 @@
     </nav>
     <div class="container">
         <div class="btn-group btn-group-lg py-5" role="group" aria-label="Basic example">
-            <button type="button" class="btn border border-primary">刷新</button>
+            <button type="button" class="btn border border-primary" onclick = "refresh_card();">刷新</button>
             <!-- <button type="button" class="btn btn-primary">Middle</button>
             <button type="button" class="btn btn-primary">Right</button> -->
         </div>
@@ -74,14 +84,22 @@
             <button type="button" class="btn btn-primary">Right</button> -->
         </div>
         <div class="card border border-primary shadow-lg p-3 mb-5 bg-white rounded py-3" id="outcard">
-            <div class="card align-middle card-roll">
+            <div class="card align-middle card-roll" id="no">
                 按下Enter键开始/停止
             </div>
-            <!-- <div class="card" id="card-roll">
-                        <div class="title">
-                            Q19010112 张帅青<br>应用开发部
-                        </div>
-                    </div> -->
+            <!-- <div class="card card-roll" id="id-2147483647">
+                <div class="row">
+                    <div class="title col-sm">
+                        Q19010112<br>张帅青<br>应用开发部
+                    </div>
+                    <div class="title col-sm">
+                        Q19010112<br>张帅青<br>应用开发部
+                    </div>
+                    <div class="title col-sm">
+                        Q1901011<br>张帅青<br>应用开发部
+                    </div>
+                </div>
+            </div> -->
         </div>
 </body>
 <!-- 

@@ -3,4 +3,4 @@
 https://www.yuque.com/docs/share/cf353b08-11f1-4534-934a-0ebf02bad59c?#  
 ### 食用方法  
 下载后将xlsx表在右上角设置按钮那里导入，之后就会保存到localStorage里面啦！  
-另有在线体验版：
+另有在线体验版：http://q1vwc0.coding-pages.com/  
