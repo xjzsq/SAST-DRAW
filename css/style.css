@@ -1,0 +1,44 @@
+.card-roll {
+    font-size: 40pt;
+    height: 300px;
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    top: -1px;
+    animation: myfirst 0.2s;
+    -webkit-animation: myfirst 0.2s;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+}
+
+
+#outcard {
+    height: 300px;
+    overflow: hidden;
+    border: 4px;
+}
+
+#anti_cheat {
+    //justify-content: left;
+}
+
+@keyframes myfirst {
+    from {
+        top: -300px;
+    }
+
+    to {
+        top: -1px;
+    }
+}
+
+@-webkit-keyframes myfirst {
+    from {
+        top: -300px;
+    }
+
+    to {
+        top: -1px;
+    }
+}
