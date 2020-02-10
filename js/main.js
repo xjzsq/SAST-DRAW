@@ -8,7 +8,7 @@ if (window.localStorage.data) {
     $(".alert").alert();
 }
 
-if (window.localStorage.anti_cheat == "true") {
+if (window.localStorage.anti_cheat === true) {
     anti_cheat = true;
     document.getElementById("defaultCheck1").checked = true;
 }
